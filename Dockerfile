@@ -1,8 +1,8 @@
 FROM alpine:latest
 
-RUN apk update \
-    && apk add --no-cache curl ca-certificates zip unzip git libpng-dev \
-    && apk add --no-cache nginx php81-fpm php81-cli php81-dev \
+RUN apk update
+RUN apk add --no-cache curl ca-certificates zip unzip git libpng-dev
+RUN apk add --no-cache nginx php81-fpm php81-cli php81-dev
     && RUN docker-php-ext-install mysql-client \
     && RUN docker-php-ext-install php8.1-gd \
        php8.1-curl \
@@ -15,6 +15,10 @@ RUN apk update \
        php8.1-imagick \
     && php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
 
-COPY ./nginx.conf /etc/nginx/conf.d
+COPY ./default.conf /etc/nginx/conf.d/default.conf
 
-ENTRYPOINT ["./entrypoint.sh"]
+CMD php81-fpm start && nginx
+
+# Expose ports.
+EXPOSE 80
+EXPOSE 443
