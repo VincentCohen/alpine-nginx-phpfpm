@@ -8,7 +8,9 @@ services:
 #      - MYSQL_PASSWORD=yoursecret
 #    ports:
 #      - '4306:3306'
-  webapp:
+  app:
     build: .
     ports:
-      - '41000:80'
+      - '8080:80'
+    volumes:
+      - ./src:/var/www/html

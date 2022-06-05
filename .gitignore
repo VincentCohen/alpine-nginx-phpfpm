@@ -1,2 +1,6 @@
 ./idea
 ./git
+.idea/.gitignore
+.idea/modules.xml
+.idea/nginx-php-fpm.iml
+.idea/vcs.xml
