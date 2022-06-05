@@ -1,16 +1,20 @@
 services:
-#  mysql:
-#    image: arm64v8/mysql:oracle
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=your_secret
-#      - MYSQL_DATABASE=your_db
-#      - MYSQL_USER=your_user
-#      - MYSQL_PASSWORD=yoursecret
-#    ports:
-#      - '4306:3306'
+  mysql:
+    image: arm64v8/mysql:oracle
+    environment:
+      - MYSQL_ROOT_PASSWORD=your_secret
+      - MYSQL_DATABASE=your_db
+      - MYSQL_USER=your_user
+      - MYSQL_PASSWORD=yoursecret
+    ports:
+      - '4306:3306'
+    volumes:
+      - mysql:/var/lib/mysql
   app:
     build: .
     ports:
       - '8080:80'
     volumes:
       - ./src:/var/www/html
+volumes:
+  mysql:
