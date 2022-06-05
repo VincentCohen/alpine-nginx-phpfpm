@@ -1,4 +1,6 @@
 services:
+  memcached:
+    image: 'memcached:alpine'
   mysql:
     image: arm64v8/mysql:oracle
     environment:
